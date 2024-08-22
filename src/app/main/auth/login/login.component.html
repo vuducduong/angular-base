@@ -1,0 +1,53 @@
+<div class="login-container" fxLayout="column" fxLayoutAlign="center center">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-login">
+    <p-card>
+      <p-card-content class="mat-command">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div fxFlex="50" [fxFlex.md]="100">
+            <p-card-header>{{"hydrogen_leak_detection_system" | translate}}</p-card-header>
+          </div>
+          <div fxFlex="50" [fxFlex.md]="100">
+            <img src="./assets/images/logo.svg" alt="Privatech" class="logo ml-auto float-right">
+          </div>
+        </div>
+      </p-card-content>
+      <p-card-content fxLayout="column" id="input-form-login">
+        <mat-label><strong>{{"user_id" | translate}}</strong></mat-label>
+        <mat-form-field class="full-width" appearance="outline">
+          <input matInput placeholder="{{'user_id' | translate}}" formControlName="{{keyFormUsername}}" autocomplete="{{keyFormUsername}}" type="text" required
+          (blur)="onInputChange(keyFormUsername, $event)">
+          <mat-error *ngIf="loginForm.get(keyFormUsername)?.hasError('required')"> {{"user_id" | translate}}{{"required" | translate}} </mat-error>
+          <mat-error *ngIf="loginForm.get(keyFormUsername)?.hasError('minlength')"> {{"minimum_length" | translate}}8{{"digit" | translate}} </mat-error>
+          <mat-error *ngIf="loginForm.get(keyFormUsername)?.hasError('maxlength')"> {{"maximum_length" | translate}}20{{"digit" | translate}} </mat-error>
+        </mat-form-field>
+
+        <mat-label><strong>{{"password" | translate}}</strong></mat-label>
+        <mat-form-field class="full-width" appearance="outline">
+          <input matInput placeholder="{{'password' | translate}}" formControlName="{{keyFormPassword}}" autocomplete="{{keyFormPassword}}" type="password" required  
+          (blur)="onInputChange(keyFormPassword, $event)">
+          <mat-error *ngIf="loginForm.get(keyFormPassword)?.hasError('required')"> {{"password" | translate}}{{"required" | translate}} </mat-error>
+          <mat-error *ngIf="loginForm.get(keyFormPassword)?.hasError('minlength')"> {{"minimum_length" | translate}}8{{"digit" | translate}} </mat-error>
+          <mat-error *ngIf="loginForm.get(keyFormPassword)?.hasError('maxlength')"> {{"maximum_length" | translate}}20{{"digit" | translate}} </mat-error>
+          <mat-error *ngIf="!loginForm.get(keyFormPassword)?.hasError('minlength') &&
+                      !loginForm.get(keyFormPassword)?.hasError('maxlength') &&
+                      loginForm.get(keyFormPassword)?.hasError('pattern')"> {{"password" | translate}}{{"incorrect_format" | translate}}
+          </mat-error>
+        </mat-form-field>
+
+      </p-card-content>
+
+      <p-card-actions class="text-right login">
+        <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid || loader">
+          {{"log_in" | translate}}
+        </button>
+      </p-card-actions>
+    </p-card>
+    <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
+  </form>
+  <div id="copy-right">
+    <p> {{ copyRight }} </p>
+  </div>
+</div>
+<div *ngIf="loader" class="cssload-container">
+  <div class="cssload-speeding-wheel"></div>
+</div>

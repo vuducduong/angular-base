@@ -1,0 +1,266 @@
+.navbar-spacer {
+    flex: 1 1 auto;
+}
+
+.nav-toolbar {
+    z-index: 100;
+    background-image: linear-gradient(-20deg, #E1FFFF 0%, #E1FFFF 100%);
+    color: black;
+}
+
+.navbar {
+    z-index: 2;
+    position: relative;
+}
+
+.progressBar {
+    position: absolute !important;
+    width: 100% !important;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.navbar-brand {
+    text-decoration: none;
+    color: #0070C0;
+    cursor: pointer;
+
+    h1 {
+        font-weight: bold;
+        font-size: 30px;
+        margin: 0;
+        display: flex;
+        margin-top: 5px;
+
+        .material-icons {
+            color: #09198A;
+            font-size: 30px;
+        }
+    }
+
+    .images {
+        width: 40px;
+        margin-right: 15px;
+    }
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.navbar-is-mobile .navbar {
+    position: fixed;
+    z-index: 2;
+}
+
+.navbar-sidenav-container {
+    flex: 1;
+}
+
+.navbar-is-mobile .navbar-sidenav-container {
+    flex: 1 0 auto;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    height: 60px !important;
+    padding: 0px 20px !important;
+}
+
+mat-sidenav {
+    background-color: #3041c2;
+    min-width: 50px !important;
+    border-right: none !important;
+    box-shadow: 6px 0 6px rgba(0, 0, 0, .1);
+}
+
+.progress-bar-container {
+    height: 5px;
+}
+
+#push-bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.mat-drawer-inner-container {
+    height: auto;
+    background-color: #3041c2;
+    overflow: hidden;
+
+    .link-list {
+        position: relative;
+    }
+}
+
+.mat-list-base {
+    padding-top: 0px;
+
+    .mat-list-item {
+        color: white;
+    }
+}
+
+.navbar-sidenav-container {
+    min-width: 180px !important;
+}
+
+.push-bottom {
+    position: absolute;
+    bottom: 0;
+    background-color: #1d33b0;
+    animation: ease-in-out 1s;
+
+    .menu-button {
+        transition: 300ms ease-in-out;
+        transform: rotate(0deg);
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.sidenav {
+    user-select: none;
+    overflow-x: hidden !important;
+
+    .menu-button {
+        transition: 300ms ease-in-out;
+        transform: rotate(0deg);
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
+    }
+
+    .submenu {
+        overflow-y: auto !important;
+        max-height: 40vh !important;
+        transition: transform 300ms ease;
+        scrollbar-color: #ffffff transparent;
+        scrollbar-width: thin;
+        transform: scaleY(0);
+        transform-origin: top;
+        height: 1px;
+
+        &.expanded {
+            transform: scaleY(1);
+            height: auto;
+        }
+
+        a {
+            padding-left: 60px;
+
+            .active {
+                background-color: #09198A;
+            }
+
+            &:hover {
+                background-color: #02159a !important;
+            }
+        }
+    }
+
+    .sidenav-content {
+        align-items: center;
+        justify-content: center;
+    }
+
+    mat-list-item {
+        &:hover {
+            background-color: #02159a !important;
+        }
+
+        a {
+            &:focus {
+                color: white;
+                background-color: transparent;
+            }
+
+            &:hover {
+                color: white;
+                background-color: transparent;
+            }
+        }
+
+        mat-icon {
+            margin-top: 6px;
+            padding: 4px;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+
+            &.rotated {
+                margin-top: 0px;
+            }
+        }
+    }
+
+    .mat-mdc-list-base {
+        --mdc-list-list-item-hover-label-text-color: white;
+        --mdc-list-list-item-focus-label-text-color: white;
+        padding-top: 0px !important;
+
+        .mat-mdc-list-item {
+            color: white;
+        }
+    }
+}
+
+.expanded {
+    transition: all 0.5s ease;
+    width: 100%;
+}
+
+.mdc-list-item:focus {
+    &::before {
+        background-color: #02159a !important;
+    }
+}
+
+.icon-home {
+    margin-right: -7px;
+}
+
+.color-black {
+    color: #000;
+}
+
+.mat-mdc-list-item.active {
+    background-color: #02159a !important;
+}
+
+.ita-icon {
+    margin-bottom: 6px;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green;
+}
+
+.width-62 {
+    width: 62px;
+}
+
+.sidenav-footer {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+}

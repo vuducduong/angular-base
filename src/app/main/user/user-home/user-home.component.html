@@ -1,0 +1,190 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="98">
+        <p-card-header class="mat-title">
+            {{"system_setting" | translate}}
+        </p-card-header>
+        <form [formGroup]="userForm">
+            <div fxLayout="row" class="mt-1 mb-1" fxLayoutGap="30px">
+                <div fxLayout="column" fxFlex="8" [fxFlex.xs]="29" [fxFlex.sm]="20" [fxFlex.lg]="12" [fxFlex.md]="15">
+                    <button mat-raised-button type="button" class="btn success" (click)="submitCreateUser()" [disabled]="userForm.pending || userForm.invalid || eventChoose == eventEdit">
+                        {{"registration" | translate}}
+                    </button>
+                </div>
+                <div fxLayout="column" fxFlex="8" [fxFlex.xs]="29" [fxFlex.sm]="20" [fxFlex.lg]="12" [fxFlex.md]="15">
+                    <button mat-raised-button type="button" class="btn danger" (click)="deleteUserDialog()" [disabled]="idSelected == nonUser || eventChoose == eventCopy">
+                        {{"delete" | translate}}
+                    </button>
+                </div>
+                <div fxLayout="column" fxFlex="8" [fxFlex.xs]="29" [fxFlex.sm]="20" [fxFlex.lg]="12" [fxFlex.md]="15">
+                    <button mat-raised-button type="button" class="btn primary" (click)="submitEditUser()" [disabled]="idSelected == nonUser || userForm.invalid || eventChoose == eventCopy">
+                        {{"renew" | translate}}
+                    </button>
+                </div>
+            </div>
+            <p-card fxLayout="row" fxLayoutGap="10px" class="mat-elevation">
+                <p-card class="child mt-0" fxFlex="100">
+                    <p-card-header class="mat-title " fxLayoutAlign="start center">
+                        <mat-list-item>
+                            <a mat-list-item>{{"account_management" | translate}} <mat-label id="text-choose" [ngClass]="{'d-none': eventChoose == ''}"></mat-label></a>
+                        </mat-list-item>
+                    </p-card-header>
+                    <form [formGroup]="userForm">
+                        <p-card-content class="mt-0" fxLayout="column">
+                            <div fxLayout="row" fxFlex="80" fxLayoutAlign="space-evenly start">
+                                <p-card class="child child-label" fxFlex="20" fxLayoutAlign="space-evenly center">
+                                    <mat-label class="label-child mt-1">{{"name" | translate}}</mat-label>
+                                </p-card>
+                                <p-card class="child group-child" fxFlex="80" fxLayout="row" fxLayoutAlign="start start">
+                                    <p-card class="child child-label child-calender" fxLayout="column" fxLayoutGap="10px" fxFlex="45" fxLayoutAlign="start start">
+                                        <p-card class="child child-label child-calender mb-0" fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="start center">
+                                            <input class="input-form max-w-400 validate-required" type="text" placeholder="{{'name' | translate}}" pInputText [formControlName]="keyFormUserName" [ngClass]="{'validate-required': userForm.get(keyFormUserName)?.touched && userForm.get(keyFormUserName)!.hasError('required')}" />
+                                        </p-card>
+                                        <p-card class="child child-label child-calender h-validate" fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="start start">
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormUserName)?.touched && userForm.get(keyFormUserName)!.hasError('required')">
+                                                {{"field_is_required" | translate}}
+                                            </small>
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormUserName)!.hasError('minlength')">
+                                                {{"name" | translate}}{{"must_be_between_8_and_20_characters" | translate}}
+                                            </small>
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormUserName)!.hasError('maxlength')">
+                                                {{"name" | translate}}{{"must_be_between_8_and_20_characters" | translate}}
+                                            </small>
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormUserName)!.hasError('validatorUnique')">
+                                                {{"name_already_exists" | translate}}
+                                            </small>
+                                        </p-card>
+                                    </p-card>
+                                </p-card>
+                            </div>
+                            <div fxLayout="row" fxFlex="80" fxLayoutAlign="space-evenly start">
+                                <p-card class="child child-label" fxFlex="20" fxLayoutAlign="space-evenly center">
+                                    <mat-label class="label-child mt-1">{{"password" | translate}}</mat-label>
+                                </p-card>
+                                <p-card class="child group-child" fxFlex="80" fxLayout="row" fxLayoutAlign="start start">
+                                    <p-card class="child child-label child-calender" fxLayout="column" fxLayoutGap="10px" fxFlex="45" fxLayoutAlign="start start">
+                                        <p-card class="child child-label child-calender mb-0" fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="start center">
+                                            <input class="input-form max-w-400" type="password" placeholder="{{'password' | translate}}" pInputText [formControlName]="keyFormPassword" [ngClass]="{'validate-required': userForm.get(keyFormPassword)?.touched && userForm.get(keyFormPassword)!.hasError('required')}" />
+                                        </p-card>
+                                        <p-card class="child child-label child-calender h-validate" fxLayout="column" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="start start">
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormPassword)?.touched && userForm.get(keyFormPassword)!.hasError('required')">
+                                                {{"field_is_required" | translate}}
+                                            </small>
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormPassword)!.hasError('minlength')">
+                                                {{"password" | translate}}{{"must_be_between_8_and_20_characters" | translate}}
+                                            </small>
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormPassword)!.hasError('maxlength')">
+                                                {{"password" | translate}}{{"must_be_between_8_and_20_characters" | translate}}
+                                            </small>
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormPassword)!.hasError('pattern')">
+                                                {{"password" | translate}}{{"please_enter_in_a_valid_format" | translate}}
+                                            </small>
+                                        </p-card>
+                                    </p-card>
+                                </p-card>
+                            </div>
+                            <div fxLayout="row" fxFlex="80" fxLayoutAlign="space-evenly start">
+                                <p-card class="child child-label" fxFlex="20" fxLayoutAlign="space-evenly center">
+                                    <mat-label class="label-child mt-1">{{"authority" | translate}}</mat-label>
+                                </p-card>
+                                <p-card class="child group-child" fxFlex="80" fxLayout="row" fxLayoutAlign="start start">
+                                    <p-card class="child child-label child-calender" fxLayout="column" fxLayoutGap="10px" fxFlex="45" fxLayoutAlign="start start">
+                                        <p-card class="child child-label child-calender" fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="start center">
+                                            <select class="select-form max-w-400" formControlName="{{ keyFormRole }}" required pInputText>
+                                                <option *ngFor="let role of listRole" [ngValue]="role.role">
+                                                    {{ role.nameRole }}
+                                                </option>
+                                            </select>
+                                        </p-card>
+                                        <p-card class="child child-label child-calender" fxLayout="row" fxLayoutGap="10px" fxFlex="100" fxLayoutAlign="start start">
+                                            <small class="p-error block" *ngIf="userForm.get(keyFormRole)?.touched && userForm.get(keyFormRole)!.hasError('required')">
+                                                {{"field_is_required" | translate}}
+                                            </small>
+                                        </p-card>
+                                    </p-card>
+                                </p-card>
+                            </div>
+                        </p-card-content>
+                    </form>
+                    <p-card-content class="mat-command" id="list-user">
+                        <mat-table #table matSort [dataSource]="dataSource" class="user-table">
+                            <ng-container matColumnDef="{{columnCopyUpdate}}">
+                                <mat-header-cell class="max-w-200" *matHeaderCellDef>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="text-center max-w-200">
+                                    <div class="mat-col" fxLayout="row" fxLayoutGap="10px">
+                                        <button mat-raised-button type="button" id="copy-user-{{ element.id }}" (click)="chooseUser(element, eventCopy)" class="btn btn-copy success fit-content">
+                                            {{"copy" | translate}}
+                                        </button>
+                                        <button mat-raised-button type="button" id="edit-user-{{ element.id }}" (click)="chooseUser(element, eventEdit)" class="btn btn-edit success fit-content">
+                                            {{"edit" | translate}}
+                                        </button>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="{{columnUserName}}">
+                                <mat-header-cell class="text-center" *matHeaderCellDef (click)="sortData($event)" [attr.data-icon]="'icon-sort-' + columnUserName" [attr.data-column]="columnUserName">
+                                    {{"name" | translate}}
+                                    <i class="icon-sort pi pi-sort-alt" id="icon-sort-{{columnUserName}}"></i>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="text-center">
+                                    <div class="mat-col text-truncate">
+                                        {{ getColumnString(element, columnUserName) }}
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="{{columnPasswordRaw}}">
+                                <mat-header-cell class="text-center" *matHeaderCellDef (click)="sortData($event)" [attr.data-icon]="'icon-sort-' + columnPasswordRaw" [attr.data-column]="columnPasswordRaw">
+                                    {{"password" | translate}}
+                                    <i class="icon-sort pi pi-sort-alt" id="icon-sort-{{columnPasswordRaw}}"></i>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="text-center">
+                                    <div class="mat-col text-truncate">
+                                        {{ getColumnString(element, columnPasswordRaw) }}
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="{{columnRole}}">
+                                <mat-header-cell class="max-w-250 text-center" *matHeaderCellDef (click)="sortData($event)" [attr.data-icon]="'icon-sort-' + columnRole" [attr.data-column]="columnRole">
+                                    {{"authority" | translate}}
+                                    <i class="icon-sort pi pi-sort-alt" id="icon-sort-{{columnRole}}"></i>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="text-center max-w-250">
+                                    <div class="mat-col text-truncate">
+                                        {{ getColumnInt(element, columnRole) | role}}
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="{{columnChooseSensor}}">
+                                <mat-header-cell *matHeaderCellDef class="max-w-200">
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="text-center max-w-200">
+                                    <div class="mat-col text-truncate">
+                                        <button mat-raised-button type="button" id="choose_sensor-{{ element.id }}" (click)="listSensorDialog(element.id, element.username)" class="btn success fit-content">
+                                            {{"sensor" | translate}}{{"selection" | translate}}
+                                        </button>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                            <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;" id="user-{{row.id}}" class="element-user"></mat-row>
+                        </mat-table>
+
+                        <ng-container *ngIf="matPaginatorLength === 0">
+                            <p class="mat-table-no-data p-12">{{"no_data" | translate}}</p>
+                        </ng-container>
+
+                        <mat-paginator #paginator [length]="matPaginatorLength" [pageIndex]="0" [pageSize]="10" (page)="pageEvent = pageNavigations($event)" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
+                        </mat-paginator>
+                    </p-card-content>
+                </p-card>
+                <div *ngIf="loader" class="cssload-container">
+                    <div class="cssload-speeding-wheel"></div>
+                </div>
+            </p-card>
+        </form>
+    </div>
+</div>

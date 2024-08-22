@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>
+  ソート／フィルターについて
+  <mat-icon class="close" (click)="closeDialog()">
+    close
+  </mat-icon>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="searchForm">
+    <div fxLayout="row" fxLayoutAlign="left none">
+      <div fxLayout="column" fxFlex="100">
+        <mat-radio-group formControlName="sort" aria-label="オプションを選択">
+          <mat-radio-button class="custom-checkbox" value="asc" (click)="sortDate($event)">昇順ソート</mat-radio-button>
+          <mat-radio-button class="custom-checkbox" value="desc" (click)="sortDate($event)">降順ソート</mat-radio-button>
+        </mat-radio-group>
+        <hr>
+        <mat-form-field appearance="outline">
+          <mat-label>フィルターについて</mat-label>
+          <input matInput formControlName="search" aria-label="フィルターについて">
+          <button mat-icon-button matSuffix (click)="searchList()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+        <div class="checkbox-group" *ngIf="dataSearch.length > 0">
+          <mat-checkbox class="custom-checkbox" (click)="selectAll($event)" [checked]="isCheckedAll">
+            すべて選択
+          </mat-checkbox>
+          <mat-checkbox class="custom-checkbox" *ngFor="let data of dataSearch" #checkboxes value="{{data.value}}"
+                        [checked]="isChecked(data.value)" (click)="setValueChecked()">
+            {{ data.value }}
+          </mat-checkbox>
+        </div>
+        <ng-container *ngIf="dataSearch.length == 0">
+          <div style="margin-top: 5px" class="mat-no-data">データなし</div>
+        </ng-container>
+        <input type="hidden" formControlName="search_list">
+        <input type="hidden" formControlName="checked_all">
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="isDisabled"
+    (click)="saveSearch()"
+  > OK
+  </button>
+  <button
+    mat-stroked-button
+    (click)="closeDialog()"
+  > キャンセル
+  </button>
+</div>

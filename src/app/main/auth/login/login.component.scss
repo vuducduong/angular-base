@@ -1,0 +1,64 @@
+mat-card-content {
+  margin-bottom: 0;
+}
+
+mat-card-actions {
+  margin-bottom: 0 !important;
+  padding: 0 40px !important;
+}
+
+.mdc-card__actions {
+  display: block !important;
+}
+
+.login-container {
+  height: 100vh;
+
+  .form-login {
+    margin: 0 10px;
+
+    mat-card {
+      padding: 8px 8px 24px !important;
+    }
+
+    mat-card-title {
+      font-size: 28px;
+      text-shadow: 1px 5px 20px #00A1E9, 1px -5px 20px #00A1E9;
+      font-weight: 500;
+    }
+
+    .logo {
+      width: 88%;
+    }
+  }
+}
+
+.login {
+  button {
+    margin: 0 !important;
+  }
+}
+
+.lost-password {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  button {
+    color: #1a73e8;
+    text-decoration: underline;
+    margin-top: 5px;
+  }
+}
+
+#copy-right {
+  margin-top: 100px;
+  width: 100%;
+  text-align: center;
+  border-top: 2px solid rgba(0, 0, 0, .12);
+  ;
+}
+
+#input-form-login {
+  padding: 16px 40px 0;
+}

@@ -1,0 +1,115 @@
+<div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches" (window:resize)="onResize($event, sidenav)">
+  <!-- Top navbar -->
+  <mat-toolbar class="navbar" color="primary" class="nav-toolbar">
+    <a class="navbar-brand" (click)="toggleSidenav(sidenav, sidenavHeader)">
+      <div style="display: flex;">
+        <h1>
+        {{"hydrogen_leak_detection_system" | translate}}
+        </h1>
+      </div>
+    </a>
+
+    <span class="navbar-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="userMenu" class="drop-down-hearder" title="{{userName}}">
+      <span class="color-black" fxShow fxHide.xs *ngIf="userName">
+        {{ userName }}
+      </span>
+      <mat-icon class="color-black">arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+      <a mat-menu-item (click)="logout()">
+        <mat-icon class="icon-logout">exit_to_app</mat-icon>
+        <span class="txt-logout">{{"log_out" | translate}}</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Sidenav -->
+  <p-sidebar-container class="navbar-sidenav-container" autosize>
+    <!-- Side nav left -->
+    <p-sidebar #sidenav [opened]="true" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav">
+      <mat-nav-list class="mat-drawer-inner-container">
+
+      <mat-list-item class="mat-drawer-inner-container"
+          [ngClass]="{'active': _router.isActive('/dashboard', true)}"
+          (click)="showSubmenu = false; showSubmenuSensorDetail = false"
+          (click)="isExpanded = true"
+          (click)="rotateRewind = false" title="{{ 'dashboard' | translate }}">
+          <mat-icon class="icon-home" mat-list-icon>home</mat-icon>
+          <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active" *ngIf="(isExpanded || isShowing)">
+            {{"display_all_detectors" | translate}}
+          </a>
+        </mat-list-item>
+
+        <mat-list-item 
+             (click)=handlerClickSensorDetail()
+             class="parent"
+             title="{{'individual_detection' | translate}}">
+            <mat-icon mat-list-icon >filter_drama</mat-icon>
+            <a mat-list-item *ngIf="isExpanded || isShowing"> {{'individual_detection' | translate}} </a>
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenuSensorDetail}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+          </mat-list-item>
+          <div class="submenu" [ngClass]="{'expanded' : showSubmenuSensorDetail}" *ngIf="isShowing || isExpanded">
+            <a *ngFor="let sensor of dataSensorByAuth" class="text-truncate"
+              mat-list-item [routerLink]="['/sensor-detail', sensor.id]" [ngClass]="{'active': sensor.id == sensorId}" [queryParams]="{ reload: true }" title="{{ sensor.name }}"
+            > {{ sensor.name | truncate:10 }} </a>
+          </div>
+
+        <mat-list-item 
+        (click)="showSubmenu = !showSubmenu; showSubmenuSensorDetail = false" 
+        (click)="isExpanded = true"
+        (click)="rotateRewind = false" title="{{'setting' | translate}}">
+        <mat-icon mat-list-icon>handyman</mat-icon>
+        <a mat-list-item *ngIf="(isExpanded || isShowing)"> {{"setting" | translate}} </a>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+      </mat-list-item>
+      <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+            <a
+              mat-list-item
+              [routerLink]="['/sensor']"
+              routerLinkActive="active"
+              title="{{ 'sensor_registration' | translate }}"
+            > {{ "sensor_registration" | translate }} </a>
+            <a *ngIf="role == roleAdmin"
+              mat-list-item
+              [routerLink]="['/export-csv']"
+              routerLinkActive="active"
+              title="{{ 'data_acquisition_screen' | translate }}"
+            > {{ "data_acquisition_screen" | translate }} </a>
+            <a *ngIf="role == roleAdmin"
+              mat-list-item
+              [routerLink]="['/delete-data']"
+              routerLinkActive="active"
+              title=" {{ 'data_deletion_screen' | translate }}"
+            >  {{ "data_deletion_screen" | translate }} </a>
+            <a *ngIf="role == roleAdmin"
+              mat-list-item
+              [routerLink]="['/alarm-setting']"
+              routerLinkActive="active"
+              title="{{ 'alarm_value_setting' | translate }}"
+            > {{ "alarm_value_setting" | translate }} </a>
+            <a *ngIf="role == roleAdmin"
+              mat-list-item
+              [routerLink]="['/user']"
+              routerLinkActive="active"
+              title="{{ 'system' | translate }}{{ 'setting' | translate }}"
+            > {{ "system" | translate }}{{ "setting" | translate }} </a>
+          </div>
+          <a class="push-bottom" mat-list-item (click)="toggleSidenav(sidenav, sidenavFooter)" [ngClass]="{'width-62' : rotateRewind}" [ngStyle]="{'width' : widthResize}">
+              <mat-icon class="menu-button" [ngClass]="{'rotated' : rotateRewind}">
+                fast_rewind
+              </mat-icon>
+          </a>
+      </mat-nav-list>
+      
+    </p-sidebar>
+    <!-- Main content -->
+    <div class="sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="sidenav-footer">
+      {{ copyRight }}
+    </div> 
+  </p-sidebar-container>
+</div>

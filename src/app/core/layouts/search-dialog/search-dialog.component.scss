@@ -1,0 +1,42 @@
+.mat-mdc-dialog-title {
+  position: relative;
+
+  .close {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+
+.mat-mdc-dialog-content {
+  .mat-mdc-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::ng-deep .mat-mdc-form-field-bottom-align {
+    display: none;
+  }
+}
+
+.mat-mdc-dialog-actions {
+  justify-content: flex-end;
+  padding: 0 24px 9px;
+}
+
+::ng-deep .mat-mdc-dialog-surface {
+  max-height: max-content !important;
+}
+
+mat-checkbox {
+  display: block;
+}
+
+.checkbox-group {
+  overflow-y: scroll;
+  max-height: 160px !important;
+  margin-top: 5px;
+}
+

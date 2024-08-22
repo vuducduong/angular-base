@@ -1,0 +1,133 @@
+.mat-mdc-dialog-title {
+    position: relative;
+
+    .close {
+        position: absolute;
+        cursor: pointer;
+        right: 10px;
+        top: 20px;
+    }
+}
+
+.mat-mdc-dialog-content {
+    padding: 0 12px 20px !important;
+}
+
+.mat-mdc-dialog-actions {
+    justify-content: flex-end;
+    padding: 0 12px 9px;
+}
+
+.title-username {
+    font-size: 16px;
+    color: #000;
+    font-weight: 700 !important;
+}
+
+.list-sensor-table {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 300px !important;
+
+    ::ng-deep .mat-sort-header-button {
+        color: #000 !important;
+    }
+
+    .mat-mdc-header-row {
+        min-height: 50px;
+        background-color: #31b6fd;
+
+        .mat-mdc-header-cell {
+            color: #fff;
+            font-weight: 700;
+        }
+    }
+
+    .mat-header-col {
+        width: 100%;
+        padding: 10px 5px;
+    }
+
+    .mat-mdc-row {
+        cursor: pointer;
+
+        .mat-mdc-cell {
+            padding: 0 5px !important;
+        }
+    }
+
+    .mat-mdc-row:nth-child(even) {
+        background-color: #cce5fe;
+    }
+
+    .mat-mdc-row:nth-child(odd):hover {
+        background-color: rgb(241, 243, 244);
+    }
+
+    .mat-column-action {
+        max-width: 50px !important;
+    }
+}
+
+label.container-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+label.container-checkbox input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+}
+
+.checkmark {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    height: 20px;
+    width: 20px;
+    background-color: #f6f5f6;
+    border: 1px solid #000000;
+}
+
+label.container-checkbox:hover input[type=checkbox]~.checkmark {
+    background-color: #ebedef;
+}
+
+label.container-checkbox input[type=checkbox]:checked~.checkmark {
+    background-color: #ffffff;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+label.container-checkbox input[type=checkbox]:checked~.checkmark:after {
+    display: block;
+}
+
+label.container-checkbox .checkmark:after {
+    left: 7px;
+    top: 1px;
+    width: 4px;
+    height: 11px;
+    border: solid #000000;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>
+    <mat-icon class="close" (click)="_dialogRef.close(false);">
+        close
+    </mat-icon>
+</h1>
+<mat-dialog-content class="dialog-delete-event">
+    <form [formGroup]="listSensorForm">
+        <h5 class="title-username">{{ "name" | translate }}: {{username}}</h5>
+        <div fxLayout="row" fxLayoutAlign="left none">
+            <div fxLayout="column" fxFlex="100">
+                <mat-table #table [dataSource]="dataListSensor" class="list-sensor-table">
+                    <ng-container matColumnDef="sensor_id">
+                        <input type="hidden" formControlName="list_sensor" id="list-sensor-checked">
+                        <mat-header-cell *matHeaderCellDef>{{ "selection" | translate }}</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <label class="container-checkbox">
+                                <input type="checkbox" class="check-sensor" value="{{row.id}}" (click)="checkedSensor(row.id, row.name)" [checked]="isChecked(row.id)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sensor_name">
+                        <mat-header-cell *matHeaderCellDef>{{ "sensor_name" | translate }}</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <ng-container *ngIf="dataListSensor.length == 0">
+                    <p class="mat-table-no-data">{{"no_data" | translate}}</p>
+                </ng-container>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="saveDialog()" [disabled]="dataListSensor.length == 0"> {{ "selection" | translate }}
+    </button>
+    <button mat-stroked-button (click)="_dialogRef.close(false);"> {{ "cancel" | translate }}
+    </button>
+</div>

@@ -1,0 +1,23 @@
+<h1 matDialogTitle>エラー</h1>
+<ng-container *ngIf="!checkIsArray(message)">
+  <div mat-dialog-content>{{message}}</div>
+</ng-container>
+<ng-container *ngIf="checkIsArray(message)">
+  <div mat-dialog-content>
+    <ng-container>
+      <ul>
+        <li *ngFor="let mg of messageArray">{{mg}}</li>
+      </ul>
+    </ng-container>
+  </div>
+</ng-container>
+<div mat-dialog-actions class="pt-20">
+  <button
+    mat-raised-button
+    mat-dialog-close
+    class="mat-accent w-100"
+    (click)="dialogRef.close(false)"
+  >
+    OK
+  </button>
+</div>

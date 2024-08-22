@@ -1,0 +1,14 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="98">
+        <p-card>
+            <div class="container" fxLayout="row" fxLayoutAlign="none">
+                <h2>HTTP {{ messageError }} </h2>
+            </div>
+        </p-card>
+        <p-card class="mat-elevation">
+            <div fxLayout="row" fxLayoutAlign="center">
+                <p class="message-error"> 再ログインの場合、<a (click)="logout()">ここで</a></p>
+            </div>
+        </p-card>
+    </div>
+</div>

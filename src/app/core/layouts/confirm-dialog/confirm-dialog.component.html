@@ -1,0 +1,18 @@
+<h1 matDialogTitle>確認</h1>
+<div mat-dialog-content>{{confirmMessage}}</div>
+<div
+    mat-dialog-actions
+    class="pt-24"
+    fxLayoutAlign="center"
+>
+    <button
+        mat-raised-button
+        class="mat-accent mr-16 w-100"
+        (click)="dialogRef.close(true)"
+    > OK </button>
+    <button
+        mat-stroked-button
+        class="mat-close ml-16 w-100"
+        (click)="dialogRef.close(false)"
+    > キャンセル </button>
+</div>
